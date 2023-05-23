@@ -1,15 +1,11 @@
 Feature: Shopping Basket
-  Scenario: Adding an item
+  Scenario Outline: Adding an item
     Given I have an empty basket
-    When I add a 'banana' to my basket
-    Then my basket contains a 'banana'
+    When I add <count> '<product>' to my basket
+    Then my basket contains <count> '<product>'s
 
-  Scenario: Adding a carrot
-    Given I have an empty basket
-    When I add a 'banana' to my basket
-    Then my basket contains a 'banana'
-
-  Scenario: Adding 3 carrots
-    Given I have an empty basket
-    When I add 3 'carrot's to my basket
-    Then my basket contains 3 'carrot's
+  Examples:
+    | count | product |
+    | 1     | banana  |
+    | 1     | carrot  |
+    | 3     | carrot  |
