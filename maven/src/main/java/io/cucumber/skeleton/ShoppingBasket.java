@@ -1,16 +1,19 @@
 package io.cucumber.skeleton;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ShoppingBasket {
-    private static final List<String> products = new ArrayList<>();
+    private static final Map<String, Integer> products = new HashMap<>();
 
     public void add(String product) {
-        products.add(product);
+        var count = products.getOrDefault(product, 0);
+        products.put(product, ++count);
     }
 
-    public List<String> getContents() {
-        return products;
+    public Set<String> getContents() {
+        return products.keySet();
     }
 }

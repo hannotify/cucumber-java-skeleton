@@ -1,5 +1,7 @@
 package io.cucumber.skeleton;
 
+import java.util.stream.IntStream;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,13 +16,23 @@ public class ShoppingBasketSteps {
         basket = new ShoppingBasket();
     }
 
-    @When("I add a banana to my basket")
-    public void i_add_a_banana_to_my_basket() {
-        basket.add("banana");
+    @When("I add a {string} to my basket")
+    public void i_add_a_product_to_my_basket(String product) {
+        basket.add(product);
     }
 
-    @Then("my basket contains a banana")
-    public void my_basket_contains_a_banana() {
-        assertTrue(basket.getContents().contains("banana"));
+    @Then("my basket contains a {string}")
+    public void my_basket_contains_a_banana(String product) {
+        assertTrue(basket.getContents().contains(product));
+    }
+
+    @When("I add {int} {string}(s) to my basket")
+    public void iAddCarrotsToMyBasket(int count, String product) {
+        IntStream.rangeClosed(1, count).forEach(i -> i_add_a_product_to_my_basket(product));
+    }
+
+    @Then("my basket contains {int} {string}s")
+    public void myBasketContainsCarrotS(int count, String product) {
+
     }
 }
